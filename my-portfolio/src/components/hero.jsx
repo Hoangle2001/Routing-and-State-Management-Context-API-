@@ -1,10 +1,7 @@
-import {
-  BsFacebook,
-  BsTwitter,
-  BsInstagram,
-  BsPinterest,
-} from "react-icons/bs";
+import { BsFacebook, BsInstagram, BsPinterest } from "react-icons/bs";
+import { IoIosContact } from "react-icons/io";
 import HeroPic from "../assets/boy.jpg";
+import { Link } from "react-router-dom";
 
 const hero = () => {
   return (
@@ -39,26 +36,48 @@ const hero = () => {
           Let’s create high-quality user experiences through clean code and
           innovative design with our front-end development services.
         </p>
-        <button className="bg-white text-indigo-600 px-10 py-2 my-3 rounded-full hover:bg-indigo-800 hover:text-white">
-          Show More...
-        </button>
+        <Link to="/about">
+          <button className="bg-white text-indigo-600 px-10 py-2 my-3 rounded-full hover:bg-indigo-800 hover:text-white">
+            Show More...
+          </button>
+        </Link>
         <div className="flex mt-5 space-x-4 cursor-pointer">
-          <BsFacebook
-            size={40}
-            className="border-4 hover:border-indigo-800 rounded-full"
-          />
-          <BsTwitter
-            size={40}
-            className="border-4 hover:border-indigo-800 rounded-full"
-          />
-          <BsInstagram
-            size={40}
-            className="border-4 hover:border-indigo-800 rounded-full"
-          />
-          <BsPinterest
-            size={40}
-            className="border-4 hover:border-indigo-800 rounded-full"
-          />
+          <Link
+            to="https://www.facebook.com/profile.php?id=100004353495201"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsFacebook
+              size={40}
+              className="border-4 hover:border-indigo-800 rounded-full"
+            />
+          </Link>
+          <Link
+            to="https://www.instagram.com/th.hoang2908/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsInstagram
+              size={40}
+              className="border-4 hover:border-indigo-800 rounded-full"
+            />
+          </Link>
+          <Link
+            to="https://www.pinterest.com/hl5998/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BsPinterest
+              size={40}
+              className="border-4 hover:border-indigo-800 rounded-full"
+            />
+          </Link>
+          <Link to="/contact">
+            <IoIosContact
+              size={40}
+              className="border-4 hover:border-indigo-800 rounded-full"
+            />
+          </Link>
         </div>
       </div>
     </section>
