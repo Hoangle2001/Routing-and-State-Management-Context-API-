@@ -2,10 +2,12 @@ import { CgNametag } from "react-icons/cg";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt1 } from "react-icons/hi";
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link từ react-router-dom
+import { Link } from "react-router-dom";
+import { useAuth } from "./context/AuthContext"; // Import hook để sử dụng AuthContext
 
 const Nav = () => {
   const [toggle, setToggle] = useState(false);
+  const { user, logout } = useAuth(); // Lấy tên người dùng và hàm logout từ context
 
   function openMenu() {
     setToggle(true);
@@ -47,6 +49,28 @@ const Nav = () => {
             >
               Contact
             </Link>
+            {user ? (
+              <div className="relative inline-block text-left">
+                <button className="hover:bg-indigo-800 rounded-full px-5 py-2 text_x1">
+                  Hi, {user}
+                </button>
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg z-10">
+                  <button
+                    onClick={logout}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Log Out
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="hover:bg-indigo-800 rounded-full px-5 py-2 text_x1"
+              >
+                Log In
+              </Link>
+            )}
           </div>
           <div className="ssm:block lg:hidden">
             {toggle ? (
@@ -81,6 +105,17 @@ const Nav = () => {
                   Contact
                 </Link>
               </li>
+              {user ? (
+                <li className="text-xl mb-2 cursor-pointer">
+                  <button onClick={logout}>Log Out</button>
+                </li>
+              ) : (
+                <li className="text-xl mb-2 cursor-pointer">
+                  <Link to="/login" onClick={closeMenu}>
+                    Log In
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         ) : null}

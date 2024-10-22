@@ -2,7 +2,7 @@ import T1 from "../assets/t1.png";
 
 const testimonial = () => {
   return (
-    <div className="flex bg-indigo-800 m-20 ssm:flex-col lg:flex-row">
+    <div className="flex bg-indigo-800 m-20 ssm:flex-col lg:flex-row items-center justify-center">
       <div className="relative rounded-xl overflow-auto p-8 hover:animate-pulse">
         <div className="overflow-hidden relative max-w-md mx-auto bg-white shadow-lg ring-1 ring-black/5 rounded-xl flex items-center gap-6 dark:bg-slate-800 dark:highlight-white/5">
           <img
