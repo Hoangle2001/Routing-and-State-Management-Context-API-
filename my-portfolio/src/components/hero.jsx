@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const hero = () => {
   return (
-    <section className="flex justify-around items-center p-10 space-x-10 lg:flex-row ssm:flex-col ssm:space-y-10">
+    <section className="flex mt-20 justify-around items-center p-10 space-x-10 lg:flex-row ssm:flex-col ssm:space-y-10 animate-appear">
       <div className="lg:w-1/3 ssm:w-fit">
         <p className="text-2xl mb-5 text-slate-300">I'm</p>
         <h1 className="text-3xl">Hoang Le</h1>
@@ -27,7 +27,7 @@ const hero = () => {
           alt=""
           width={100}
           height={200}
-          className="rounded-full w-full border-8 border-white"
+          className="rounded-full w-full border-8 border-white avt spin-on-load"
         />
       </div>
       <div className="w-1/3 ssm:w-fit">
@@ -49,7 +49,7 @@ const hero = () => {
           >
             <BsFacebook
               size={40}
-              className="border-4 hover:border-indigo-800 rounded-full"
+              className="border-4 hover:border-indigo-800 rounded-full hover:animate-bounce"
             />
           </Link>
           <Link
@@ -59,7 +59,7 @@ const hero = () => {
           >
             <BsInstagram
               size={40}
-              className="border-4 hover:border-indigo-800 rounded-full"
+              className="border-4 hover:border-indigo-800 rounded-full hover:animate-bounce"
             />
           </Link>
           <Link
@@ -69,13 +69,13 @@ const hero = () => {
           >
             <BsPinterest
               size={40}
-              className="border-4 hover:border-indigo-800 rounded-full"
+              className="border-4 hover:border-indigo-800 rounded-full hover:animate-bounce"
             />
           </Link>
           <Link to="/contact">
             <IoIosContact
               size={40}
-              className="border-4 hover:border-indigo-800 rounded-full"
+              className="border-4 hover:border-indigo-800 rounded-full hover:animate-bounce"
             />
           </Link>
         </div>

@@ -7,17 +7,12 @@ const LogInPage = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  const [error, setError] = useState(null);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      login(username);
-      setUsername("");
-      navigate("/");
-    } catch (err) {
-      setError("Login failed. Please try again.");
-    }
+    localStorage.setItem("username", username);
+    login(username); // Lưu tên người dùng vào trạng thái chung
+    setUsername(""); // Reset ô nhập
+    navigate("/");
   };
 
   return (
@@ -35,7 +30,7 @@ const LogInPage = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="border border-gray-300 p-2 rounded w-full"
+              className="text-black border border-gray-300 p-2 rounded w-full"
               placeholder="Enter your username"
             />
           </div>

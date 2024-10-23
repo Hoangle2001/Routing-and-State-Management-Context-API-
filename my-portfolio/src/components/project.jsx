@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const project = () => {
   return (
-    <>
+    <div className="animate-appear">
       <div className="bg-indigo-800 m-20 max-w-full">
         <div className="grid justify-items-center m-10">
           <h1 className="text-3xl mt-10">Projects</h1>
@@ -65,7 +65,7 @@ const project = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

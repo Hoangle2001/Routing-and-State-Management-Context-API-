@@ -4,3 +4,85 @@
 .text-3x1 {
   font-size: 2rem;
 }
+
+.fixed {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50; /* Đảm bảo Nav nằm trên các phần tử khác */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+/* Animation avt hero */
+@keyframes slow-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation chạy tự động trong 5 giây khi vào trang */
+.spin-on-load {
+  animation: slow-spin 3s linear forwards;
+}
+
+
+/* Animation Logo */
+/* Animation bounce khi trang vừa load */
+@keyframes fast-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Animation bounce khi hover */
+@keyframes bounce-hover {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+/* Animation bounce khi trang load trong 5 giây */
+.bounce-on-load {
+  animation: fast-bounce 2s ease forwards;
+}
+
+/* Animation bounce khi hover */
+.logo:hover {
+  animation: bounce-hover 1s ease infinite;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(100px); /* Di chuyển nhẹ lên từ dưới */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-appear {
+  animation: appear 0.5s ease-out forwards; /* Thời gian và kiểu animation */
+}
+
+
+
