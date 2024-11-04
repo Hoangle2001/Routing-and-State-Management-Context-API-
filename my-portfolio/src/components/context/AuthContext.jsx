@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import { useNavigate } from "react-router-dom";
 
 // Tạo context
@@ -16,16 +22,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (username) => {
+  const login = useCallback((username) => {
     localStorage.setItem("username", username);
     setUser(username);
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem("username");
     setUser(null);
     navigate("/login");
-  };
+  }, [navigate]);
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

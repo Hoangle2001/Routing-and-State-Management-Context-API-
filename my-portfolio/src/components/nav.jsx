@@ -1,7 +1,7 @@
 import { CgNametag } from "react-icons/cg";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt1 } from "react-icons/hi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "./context/AuthContext"; // Import hook để sử dụng AuthContext
 
@@ -35,51 +35,49 @@ const Nav = () => {
     };
   }, [prevScrollPos]);
 
-  function openMenu() {
+  const openMenu = useCallback(() => {
     setToggle(true);
-  }
+  }, []);
 
-  function closeMenu() {
+  const closeMenu = useCallback(() => {
     setToggle(false);
-  }
+  }, []);
 
-  const handleLogout = () => {
-    // Hiển thị thông báo xác nhận
+  const handleLogout = useCallback(() => {
     const confirmLogout = window.confirm("Bạn muốn Logout?");
     if (confirmLogout) {
       logout(); // Nếu người dùng xác nhận, thực hiện logout
     }
-  };
+  }, [logout]);
 
   // Hàm xử lý khi hover vào tên người dùng
-  const handleMouseEnter = () => {
+  const handleMouseEnter = useCallback(() => {
     setIsHovered(true);
     setIsLogoutVisible(true); // Hiển thị nút Log Out khi hover
     clearTimeout(timeoutId); // Xóa timeout nếu người dùng hover vào
-  };
+  }, [timeoutId]);
 
   // Hàm xử lý khi rời khỏi tên người dùng và nút Log Out
-  const handleMouseLeave = () => {
-    // Thiết lập timeout để ẩn nút Log Out
+  const handleMouseLeave = useCallback(() => {
     const id = setTimeout(() => {
       setIsLogoutVisible(false);
       setIsHovered(false); // Ẩn khi không còn hover
-    }, 3000); // Đặt thời gian ở đây, ví dụ 200ms
+    }, 3000); // Đặt thời gian ở đây, ví dụ 3000ms
     setTimeoutId(id);
-  };
+  }, [timeoutId]);
 
   return (
-    <>
-      {/* Sử dụng className để điều khiển hiển thị của Nav */}
+    <div className="bg-blue-50 text-black">
+      <div style={{ height: 72 }}></div>
       <div
-        className={`fixed top-0 left-0 right-0 z-50 bg-indigo-800 p-10 flex items-center justify-between lg:flex-row transition-transform duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 bg-blue-50 p-4 flex items-center justify-between lg:flex-row transition-transform duration-300 ${
           visible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="h-100">
+        <div>
           <Link
             to="/"
-            className="font-mono custom-logo text-3x1 tracking-wider flex items-center logo bounce-on-load"
+            className="font-mono custom-logo text-3xl tracking-wider flex items-center logo bounce-on-load"
           >
             <CgNametag />
             LOGO
@@ -89,42 +87,41 @@ const Nav = () => {
           <div className="ssm:hidden lg:block space-x-2">
             <Link
               to="/about"
-              className="hover:bg-indigo-800 rounded-full px-5 py-2 text_x1"
+              className="hover:bg-gray-500 rounded-full px-5 py-2 text_x1"
             >
               About
             </Link>
             <Link
               to="/work"
-              className="hover:bg-indigo-800 rounded-full px-5 py-2 text_x1"
+              className="hover:bg-gray-500 rounded-full px-5 py-2 text_x1"
             >
               Work
             </Link>
             <Link
               to="/contact"
-              className="hover:bg-indigo-800 rounded-full px-5 py-2 text_x1"
+              className="hover:bg-gray-500 rounded-full px-5 py-2 text_x1"
             >
               Contact
             </Link>
             {user ? (
               <div className="relative inline-block text-left animate-bounce">
                 <button
-                  className="hover:bg-indigo-800 rounded-full px-5 py-2 text_x1"
+                  className="hover:bg-gray-500 rounded-full px-5 py-2 text_x1"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
                   Hi, {user}
                 </button>
-                {/* Hiển thị nút Log Out bên dưới tên người dùng */}
                 <div
                   className={`absolute right-0 mt-2 w-56 bg-gray-100 rounded-md shadow-lg z-10 transition-transform duration-300 ${
                     isHovered || isLogoutVisible ? "scale-y-100" : "scale-y-0"
                   }`}
-                  style={{ transformOrigin: "top" }} // Đặt điểm gốc cho hiệu ứng thu phóng
+                  style={{ transformOrigin: "top" }}
                 >
                   <button
                     onClick={handleLogout}
-                    onMouseEnter={() => setIsLogoutVisible(true)} // Giữ nút Log Out hiển thị khi hover vào nó
-                    onMouseLeave={handleMouseLeave} // Ẩn khi không hover
+                    onMouseEnter={() => setIsLogoutVisible(true)}
+                    onMouseLeave={handleMouseLeave}
                     className="block px-4 py-2 rounded-md text-sm text-gray-700 hover:bg-zinc-400 w-full text-left"
                   >
                     Log Out
@@ -134,7 +131,7 @@ const Nav = () => {
             ) : (
               <Link
                 to="/login"
-                className="hover:bg-indigo-800 rounded-full px-5 py-2 text_x1"
+                className="hover:bg-gray-500 rounded-full px-5 py-2 text_x1"
               >
                 Log In
               </Link>
@@ -188,7 +185,7 @@ const Nav = () => {
           </div>
         ) : null}
       </div>
-    </>
+    </div>
   );
 };
 

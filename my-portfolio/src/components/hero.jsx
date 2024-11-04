@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const hero = () => {
   return (
-    <section className="flex mt-20 justify-around items-center p-10 space-x-10 lg:flex-row ssm:flex-col ssm:space-y-10 animate-appear">
-      <div className="lg:w-1/3 ssm:w-fit">
-        <p className="text-2xl mb-5 text-slate-300">I'm</p>
+    <div className="flex mt-10 text-black bg-white justify-between items-center p-10 space-x-12 lg:flex-row ssm:flex-col ssm:space-y-10 animate-appear min-h-screen">
+      <div className="lg:w-2/3 ssm:w-fit">
+        <p className="text-2xl mb-5 text-black">I'm</p>
         <h1 className="text-3xl">Hoang Le</h1>
         <hr />
-        <p className="mt-10 text-slate-300 font-san">
+        <p className="mt-10 text-black font-san">
           As a passionate Front-End Developer, I specialize in creating
           intuitive, responsive, and visually appealing user interfaces. With a
           strong foundation in HTML, CSS, JavaScript, and modern frameworks like
@@ -20,27 +20,6 @@ const hero = () => {
           development. Whether it's building engaging websites or improving
           existing applications, I love turning creative ideas into reality.
         </p>
-      </div>
-      <div className="w-1/3 items-center ssm:w-fit">
-        <img
-          src={HeroPic}
-          alt=""
-          width={100}
-          height={200}
-          className="rounded-full w-full border-8 border-white avt spin-on-load"
-        />
-      </div>
-      <div className="w-1/3 ssm:w-fit">
-        <p className="text-4xl mb-4">About Me</p>
-        <p className="text-slate-300">
-          Let’s create high-quality user experiences through clean code and
-          innovative design with our front-end development services.
-        </p>
-        <Link to="/about">
-          <button className="bg-white text-indigo-600 px-10 py-2 my-3 rounded-full hover:bg-indigo-800 hover:text-white">
-            Show More...
-          </button>
-        </Link>
         <div className="flex mt-5 space-x-4 cursor-pointer">
           <Link
             to="https://www.facebook.com/profile.php?id=100004353495201"
@@ -49,7 +28,7 @@ const hero = () => {
           >
             <BsFacebook
               size={40}
-              className="border-4 hover:border-indigo-800 rounded-full hover:animate-bounce"
+              className="border-4 border-blue-100 hover:border-blue-300 rounded-full hover:animate-bounce"
             />
           </Link>
           <Link
@@ -59,7 +38,7 @@ const hero = () => {
           >
             <BsInstagram
               size={40}
-              className="border-4 hover:border-indigo-800 rounded-full hover:animate-bounce"
+              className="border-4 border-blue-100 hover:border-blue-300 rounded-full hover:animate-bounce"
             />
           </Link>
           <Link
@@ -69,18 +48,27 @@ const hero = () => {
           >
             <BsPinterest
               size={40}
-              className="border-4 hover:border-indigo-800 rounded-full hover:animate-bounce"
+              className="border-4 border-blue-100 hover:border-blue-300 rounded-full hover:animate-bounce"
             />
           </Link>
           <Link to="/contact">
             <IoIosContact
               size={40}
-              className="border-4 hover:border-indigo-800 rounded-full hover:animate-bounce"
+              className="border-4 border-blue-100 hover:border-blue-300 rounded-full hover:animate-bounce"
             />
           </Link>
         </div>
       </div>
-    </section>
+      <div className="w-4/5 flex justify-center ssm:w-fit">
+        <img
+          src={HeroPic}
+          alt=""
+          width={80}
+          height={80}
+          className="rounded-full w-2/3 border-8 border-black avt spin-on-load"
+        />
+      </div>
+    </div>
   );
 };
 

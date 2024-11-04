@@ -1,5 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useAuth } from "./context/AuthContext";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+
+const containerStyle = {
+  width: "400px",
+  height: "400px",
+};
+
+const center = {
+  lat: -3.745,
+  lng: -38.523,
+};
 
 const Footer = () => {
   const { user } = useAuth();
@@ -10,12 +21,11 @@ const Footer = () => {
   });
 
   useEffect(() => {
-    // Lấy tên người dùng từ localStorage và thiết lập vào state
     const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
       setFormData((prevData) => ({
         ...prevData,
-        name: storedUsername, // Thiết lập tên người dùng vào ô username
+        name: storedUsername,
       }));
     }
   }, []);
@@ -27,7 +37,6 @@ const Footer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Giả sử bạn có một API để gửi dữ liệu
     try {
       const response = await fetch("https://example.com/api/contact", {
         method: "POST",
@@ -41,19 +50,31 @@ const Footer = () => {
         throw new Error("Network response was not ok");
       }
 
-      // Xử lý phản hồi nếu cần
       console.log("Data submitted successfully:", formData);
-
-      // Reset form after submission (optional)
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("Error submitting data:", error);
     }
   };
 
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "YOUR_REAL_API_KEY",
+    libraries: ["places"],
+  });
+
+  const onLoad = useCallback((map) => {
+    const bounds = new window.google.maps.LatLngBounds(center);
+    map.fitBounds(bounds);
+  }, []);
+
+  const onUnmount = useCallback((map) => {
+    // setMap(null);
+  }, []);
+
   return (
-    <footer className="bg-indigo-800 text-white p-8 animate-appear">
-      <div className="container mx-auto">
+    <footer className="bg-blue-50 text-black p-8 flex justify-start animate-appear">
+      <div className="container mr-auto w-1/2">
         <h2 className="text-2xl font-bold mb-4">Contact for me</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -109,6 +130,20 @@ const Footer = () => {
           </button>
         </form>
       </div>
+      {isLoaded && (
+        <div className="googlemaps">
+          <h1>Maps</h1>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={10}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          >
+            {/* Các thành phần con, chẳng hạn như điểm đánh dấu, cửa sổ thông tin, v.v. */}
+          </GoogleMap>
+        </div>
+      )}
     </footer>
   );
 };

@@ -32,9 +32,13 @@
   }
 }
 
-/* Animation chạy tự động trong 5 giây khi vào trang */
+/* Quay chậm và lặp lại vô hạn */
 .spin-on-load {
-  animation: slow-spin 3s linear forwards;
+  animation: slow-spin 20s linear infinite;
+}
+.avt {
+  border-radius: 50%; /* Đảm bảo là hình tròn */
+  transition: transform 0.3s ease; /* Thêm hiệu ứng khi tải */
 }
 
 
@@ -83,6 +87,68 @@
 .animate-appear {
   animation: appear 0.5s ease-out forwards; /* Thời gian và kiểu animation */
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Di chuyển qua nửa danh sách */
+  }
+}
+
+.overflow-hidden {
+  max-width: 100vw; /* Giới hạn chiều rộng bằng màn hình */
+  overflow: hidden; /* Ẩn phần tràn ra ngoài */
+}
+
+.animate-scroll {
+  display: flex;
+  gap: 20px;
+  animation: scroll 20s linear infinite; /* Animation chạy liên tục */
+  width: calc(200% + 20px); /* Đảm bảo chiều rộng để cuộn mượt */
+}
+
+/* Định nghĩa keyframes cho hiệu ứng trượt từ bên trái vào */
+@keyframes slideInLeft {
+  /* Bắt đầu với phần tử ở ngoài màn hình bên trái và trong suốt */
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  /* Kết thúc với phần tử ở vị trí bình thường và hiện hoàn toàn */
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Định nghĩa keyframes cho hiệu ứng trượt từ bên phải vào */
+@keyframes slideInRight {
+  /* Bắt đầu với phần tử ở ngoài màn hình bên phải và trong suốt */
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  /* Kết thúc với phần tử ở vị trí bình thường và hiện hoàn toàn */
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Áp dụng hiệu ứng trượt vào từ trái */
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease forwards;
+  /* Thời gian hiệu ứng: 0.6s, hàm easing: ease để hiệu ứng mượt mà */
+}
+
+/* Áp dụng hiệu ứng trượt vào từ phải */
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease forwards;
+  /* Thời gian hiệu ứng: 0.6s, hàm easing: ease để hiệu ứng mượt mà */
+}
+
 
 
 
