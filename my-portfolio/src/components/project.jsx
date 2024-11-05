@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useRef, useEffect } from "react";
 import Project1Img from "../assets/project1.png";
 import { Link } from "react-router-dom";
@@ -77,7 +78,7 @@ const Project = () => {
       case "Projects":
         return (
           <div ref={ref} className="grid grid-cols-2 gap-4 p-5">
-            <Link to="/work">
+            <Link to="/weather-app">
               <div
                 className={`max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:animate-pulse ${
                   isVisible ? "animate-slideInLeft" : "opacity-0"

@@ -1,3 +1,4 @@
+import React from "react";
 import { RiComputerLine } from "react-icons/ri";
 import { CiMobile3 } from "react-icons/ci";
 import { TbWorldWww } from "react-icons/tb";

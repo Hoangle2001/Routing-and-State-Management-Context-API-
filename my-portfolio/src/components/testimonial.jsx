@@ -1,3 +1,4 @@
+import React from "react";
 import T1 from "../assets/t1.png";
 
 const Testimonial = () => {

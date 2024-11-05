@@ -1,3 +1,4 @@
+import React from "react";
 import { BsFacebook, BsInstagram, BsPinterest } from "react-icons/bs";
 import { IoIosContact } from "react-icons/io";
 import HeroPic from "../assets/boy.jpg";
