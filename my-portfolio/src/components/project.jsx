@@ -107,7 +107,7 @@ const Project = () => {
               </div>
             </Link>
 
-            <Link to="/work">
+            <Link to="/landing-page">
               <div
                 className={`max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl hover:animate-pulse ${
                   isVisible ? "animate-slideInRight" : "opacity-0"

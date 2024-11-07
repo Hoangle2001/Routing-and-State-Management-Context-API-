@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "./context/AuthContext";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import Drawer from "./drawer";
 
 const containerStyle = {
   width: "400px",
@@ -131,20 +132,8 @@ const Footer = () => {
           </button>
         </form>
       </div>
-      {isLoaded && (
-        <div className="googlemaps">
-          <h1>Maps</h1>
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={10}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-          >
-            {/* Các thành phần con, chẳng hạn như điểm đánh dấu, cửa sổ thông tin, v.v. */}
-          </GoogleMap>
-        </div>
-      )}
+
+      <Drawer />
     </footer>
   );
 };
