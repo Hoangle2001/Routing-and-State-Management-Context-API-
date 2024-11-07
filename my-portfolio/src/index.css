@@ -12,6 +12,8 @@
   z-index: 50; /* Đảm bảo Nav nằm trên các phần tử khác */
 }
 
+
+
 @keyframes marquee {
   0% {
     transform: translateX(100%);
