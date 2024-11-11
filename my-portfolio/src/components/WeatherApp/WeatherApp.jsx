@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import TopButtons from "./TopButtons"; // Không cần thêm ./components/weatherapp/
+import TopButtons from "./TopButtons";
 import Inputs from "./Input";
 import TimeAndLocation from "./TimeAndLocation";
 import TempAndDetails from "./TempAndDetails";
 import Forecast from "./Forecast";
-import getFormattedWeatherData from "../services/weatherService"; // Điều chỉnh đường dẫn nếu cần
+import getFormattedWeatherData from "../services/weatherService";
 
 function WeatherApp() {
   const [query, setQuery] = useState({ q: "Ho chi minh" });
   const [units, setUnits] = useState("metric");
   const [weather, setWeather] = useState(null);
 
-  const getWeather = async () => {
-    await getFormattedWeatherData({ ...query, units }).then((data) => {
+  useEffect(() => {
+    const fetchWeather = async () => {
+      const data = await getFormattedWeatherData({ ...query, units });
       setWeather(data);
       console.log(data);
-    });
-  };
+    };
 
-  useEffect(() => {
-    getWeather();
+    fetchWeather();
   }, [query, units]);
 
   const formatBackground = () => {

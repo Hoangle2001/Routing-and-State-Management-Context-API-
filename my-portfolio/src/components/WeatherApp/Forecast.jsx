@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 
 const Forecast = ({ title, data }) => {
   return (
@@ -22,6 +23,18 @@ const Forecast = ({ title, data }) => {
       </div>
     </div>
   );
+};
+
+// Thêm PropTypes cho các props
+Forecast.propTypes = {
+  title: PropTypes.string.isRequired, // 'title' là chuỗi và là bắt buộc
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired, // 'title' trong mỗi item là chuỗi và bắt buộc
+      icon: PropTypes.string.isRequired, // 'icon' là chuỗi (URL của hình ảnh)
+      temp: PropTypes.number.isRequired, // 'temp' là số và bắt buộc
+    })
+  ).isRequired, // 'data' là mảng và bắt buộc
 };
 
 export default Forecast;

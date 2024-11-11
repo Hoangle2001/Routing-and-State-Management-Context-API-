@@ -1,75 +1,68 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Drawer = () => {
-  let startY = null;
-  let moving = false;
+  const startY = useRef(null);
+  const moving = useRef(false);
+  const [isOpen, setIsOpen] = useState(false); // Thêm state để điều khiển sự hiển thị của overlay
 
   useEffect(() => {
     const drawer = document.getElementById("drawer");
     const overlay = document.getElementById("overlay");
     const openDrawerBtn = document.getElementById("openDrawerBtn");
 
-    // Mở drawer
     const openDrawer = () => {
-      overlay.classList.remove("hidden");
-      overlay.style.transition = "opacity 0.5s ease"; // Thêm hiệu ứng opacity khi mở
-      overlay.style.opacity = 1; // Đảm bảo overlay hiển thị với opacity là 1
+      setIsOpen(true); // Mở drawer khi nhấn nút mở
+      overlay.style.transition = "opacity 0.5s ease";
+      overlay.style.opacity = 1;
 
-      // Đảm bảo hiệu ứng transition sẽ được áp dụng trước khi thay đổi vị trí
       setTimeout(() => {
         drawer.style.transition =
           "transform 0.5s cubic-bezier(0.32, 0.72, 0, 1)";
-        drawer.style.transform = "translateY(0)"; // Trượt lên khi mở
-      }, 50); // Đảm bảo rằng transition có thể chạy
+        drawer.style.transform = "translateY(0)";
+      }, 50);
     };
 
     openDrawerBtn.addEventListener("click", openDrawer);
 
-    // Đóng drawer
     const closeDrawer = () => {
       drawer.style.transition = "transform 0.5s cubic-bezier(0.32, 0.72, 0, 1)";
-      drawer.style.transform = "translateY(100%)"; // Trượt xuống khi đóng
+      drawer.style.transform = "translateY(100%)";
 
-      // Từ từ giảm opacity của overlay trong quá trình đóng
-      overlay.style.transition = "opacity 0.5s ease"; // Thêm hiệu ứng cho opacity
-      overlay.style.opacity = 0; // Giảm opacity của overlay xuống 0
+      overlay.style.transition = "opacity 0.5s ease";
+      overlay.style.opacity = 0;
 
-      // Ẩn overlay sau khi đóng drawer
       setTimeout(() => {
-        overlay.classList.add("hidden");
-      }, 500); // Chờ cho hiệu ứng opacity hoàn thành
+        setIsOpen(false); // Đóng drawer khi nhấn vào overlay
+      }, 500);
     };
 
-    // Xử lý kéo chuột xuống để đóng drawer
     const handleMouseDown = (e) => {
-      startY = e.clientY;
-      moving = true;
+      startY.current = e.clientY;
+      moving.current = true;
 
       const onMouseMove = (e) => {
-        if (!moving) return;
-        const moveY = e.clientY - startY;
+        if (!moving.current) return;
+        const moveY = e.clientY - startY.current;
         if (moveY > 0) {
-          drawer.style.transition = ""; // Tắt transition khi kéo
-          drawer.style.transform = `translateY(${moveY}px)`; // Cập nhật vị trí khi kéo xuống
+          drawer.style.transition = "";
+          drawer.style.transform = `translateY(${moveY}px)`;
         }
       };
 
       const onMouseUp = (e) => {
-        if (!moving) return;
-        const moveY = e.clientY - startY;
-        moving = false;
+        if (!moving.current) return;
+        const moveY = e.clientY - startY.current;
+        moving.current = false;
 
-        // Chỉ đóng khi kéo qua 50px
         if (moveY > 50) {
           closeDrawer();
         } else {
           drawer.style.transition =
             "transform 0.5s cubic-bezier(0.32, 0.72, 0, 1)";
-          drawer.style.transform = "translateY(0)"; // Trả lại vị trí ban đầu nếu kéo không đủ
+          drawer.style.transform = "translateY(0)";
         }
 
-        // Dọn dẹp sự kiện
-        startY = null;
+        startY.current = null;
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
       };
@@ -80,9 +73,7 @@ const Drawer = () => {
 
     drawer.addEventListener("mousedown", handleMouseDown);
 
-    // Đóng drawer khi click vào overlay (đảm bảo click vào overlay mà không phải drawer)
     const handleOverlayClick = (e) => {
-      // Chỉ đóng khi click vào overlay (không phải drawer)
       if (e.target === overlay) {
         closeDrawer();
       }
@@ -90,7 +81,6 @@ const Drawer = () => {
 
     overlay.addEventListener("click", handleOverlayClick);
 
-    // Dọn dẹp sự kiện khi component unmount
     return () => {
       drawer.removeEventListener("mousedown", handleMouseDown);
       overlay.removeEventListener("click", handleOverlayClick);
@@ -109,7 +99,9 @@ const Drawer = () => {
 
       <div
         id="overlay"
-        className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-center justify-center hidden"
+        className={`fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-center justify-center ${
+          !isOpen ? "hidden" : ""
+        }`}
         style={{ opacity: 0 }} // Đặt opacity ban đầu là 0 (ẩn)
       >
         <div

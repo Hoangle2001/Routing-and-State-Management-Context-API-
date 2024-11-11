@@ -116,7 +116,7 @@ const Project = () => {
                 <div className="md:flex">
                   <div className="p-8">
                     <div className="text-black uppercase tracking-wide text-sm font-semibold">
-                      Weather-App 2
+                      Landing page
                     </div>
                     <p className="mt-2 text-slate-500">
                       Another description for the second weather project.

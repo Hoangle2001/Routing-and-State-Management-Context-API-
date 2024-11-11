@@ -1,9 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 import { FaThermometerEmpty } from "react-icons/fa";
 import { BiSolidDropletHalf } from "react-icons/bi";
 import { FiWind } from "react-icons/fi";
 import { GiSunrise, GiSunset } from "react-icons/gi";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+
 const TempAndDetails = ({
   weather: {
     details,
@@ -100,6 +102,22 @@ const TempAndDetails = ({
       </div>
     </div>
   );
+};
+
+// Thêm PropTypes cho các props
+TempAndDetails.propTypes = {
+  weather: PropTypes.shape({
+    details: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+    temp: PropTypes.number.isRequired,
+    temp_min: PropTypes.number.isRequired,
+    temp_max: PropTypes.number.isRequired,
+    sunrise: PropTypes.string.isRequired,
+    sunset: PropTypes.string.isRequired,
+    speed: PropTypes.number.isRequired,
+    humidity: PropTypes.number.isRequired,
+    feels_like: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default TempAndDetails;
